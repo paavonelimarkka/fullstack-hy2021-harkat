@@ -15,23 +15,32 @@ const Statistics = (props) => {
 
   const allAverage = all => all.reduce((a,b) => a + b, 0) / all.length
 
-  return (
-    <div>
+  if (props.all.length === 0) {
+    return (
+      <div>
+        <p>Please give us feedback to see the statistics.</p>
+      </div>
+    )
+  }
+  else {
+    return (
+      <div>
 
-      <h2>Statistics</h2>
+        <h2>Statistics</h2>
 
-      <p>Good: {props.good}</p>
-      <p>Neutral: {props.neutral}</p>
-      <p>Bad: {props.bad}</p>
+        <p>Good: {props.good}</p>
+        <p>Neutral: {props.neutral}</p>
+        <p>Bad: {props.bad}</p>
 
-      <hr/>
+        <hr/>
 
-      <p>All: {props.all.length}</p>
-      <p>Average: {allAverage(props.all)}</p>
-      <p>Positive: {positiveRatio(props.all)}</p>
+        <p>All: {props.all.length}</p>
+        <p>Average: {allAverage(props.all)}</p>
+        <p>Positive: {positiveRatio(props.all)}</p>
 
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
 
