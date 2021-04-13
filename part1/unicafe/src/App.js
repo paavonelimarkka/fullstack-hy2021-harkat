@@ -10,9 +10,10 @@ const Button = (props) => {
 
 const Statistic = (props) => {
   return (
-    <div>
-      <p>{props.text}: {props.value}</p>
-    </div>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
   )
 }
 
@@ -25,7 +26,7 @@ const Statistics = (props) => {
         positiveSum = positiveSum+1
       }
     })
-    return positiveSum / all.length
+    return positiveSum / all.length * 100 + "%"
   }
 
   const allAverage = all => all.reduce((a,b) => a + b, 0) / all.length
@@ -41,13 +42,16 @@ const Statistics = (props) => {
     return (
       <div>
         <h2>Statistics</h2>
-        <Statistic text={"Good"} value={props.good} />
-        <Statistic text={"Neutral"} value={props.neutral} />
-        <Statistic text={"Bad"} value={props.bad} />
-        <hr/>
-        <Statistic text={"All"} value={props.all.length} />
-        <Statistic text={"Average"} value={allAverage(props.all)} />
-        <Statistic text={"Positive"} value={positiveRatio(props.all)} />
+        <table border="1">
+          <tbody>
+            <Statistic text={"Good"} value={props.good} />
+            <Statistic text={"Neutral"} value={props.neutral} />
+            <Statistic text={"Bad"} value={props.bad} />
+            <Statistic text={"All"} value={props.all.length} />
+            <Statistic text={"Average"} value={allAverage(props.all)} />
+            <Statistic text={"Positive"} value={positiveRatio(props.all)} />   
+          </tbody>       
+        </table>    
       </div>
     )
   }
