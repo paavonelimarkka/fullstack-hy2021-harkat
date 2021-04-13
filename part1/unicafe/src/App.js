@@ -1,5 +1,20 @@
 import React, { useState } from 'react'
 
+const Button = (props) => {
+  return (
+    <div>
+      <button onClick={props.handleClick}>{props.text}</button>
+    </div>
+  )
+}
+
+const Statistic = (props) => {
+  return (
+    <div>
+      <p>{props.text}: {props.value}</p>
+    </div>
+  )
+}
 
 const Statistics = (props) => {
 
@@ -25,24 +40,18 @@ const Statistics = (props) => {
   else {
     return (
       <div>
-
         <h2>Statistics</h2>
-
-        <p>Good: {props.good}</p>
-        <p>Neutral: {props.neutral}</p>
-        <p>Bad: {props.bad}</p>
-
+        <Statistic text={"Good"} value={props.good} />
+        <Statistic text={"Neutral"} value={props.neutral} />
+        <Statistic text={"Bad"} value={props.bad} />
         <hr/>
-
-        <p>All: {props.all.length}</p>
-        <p>Average: {allAverage(props.all)}</p>
-        <p>Positive: {positiveRatio(props.all)}</p>
-
+        <Statistic text={"All"} value={props.all.length} />
+        <Statistic text={"Average"} value={allAverage(props.all)} />
+        <Statistic text={"Positive"} value={positiveRatio(props.all)} />
       </div>
     )
   }
 }
-
 
 const App = () => {
   const [good, setGood] = useState(0)
@@ -52,12 +61,11 @@ const App = () => {
 
   return (
     <div>
-
       <h1>Give us feedback!</h1>
 
-      <button onClick={ () => setGood(good+1) + setAll(all.concat(1)) }>Good</button>
-      <button onClick={ () => setNeutral(neutral+1) + setAll(all.concat(0)) }>Neutral</button>
-      <button onClick={ () => setBad(bad+1) + setAll(all.concat(-1)) }>Bad</button>
+      <Button handleClick={() => setGood(good+1) + setAll(all.concat(1))} text="Good" />
+      <Button handleClick={() => setNeutral(neutral+1) + setAll(all.concat(0))} text="Neutral" />
+      <Button handleClick={() => setBad(bad+1) + setAll(all.concat(-1))} text="Bad" />
 
       <Statistics
         good={good}
@@ -65,7 +73,6 @@ const App = () => {
         bad={bad}
         all={all}
       />
-      
     </div>
   )
 }
