@@ -17,6 +17,17 @@ const RandomAnecdote = (props) => {
   )
 }
 
+const BestAnecdote = (props) => {
+  let indexOfMaxValue = props.points.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0)
+  let maxValue = props.points.reduce((a,b) => Math.max(a,b))
+  return (
+    <div>
+      <p>{props.anecdotes[indexOfMaxValue]}</p>
+      <p>..with {maxValue} points!</p>
+    </div>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -38,9 +49,13 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <RandomAnecdote anecdotes={anecdotes} selected={selected} points={points} />
       <Button handleClick={() => plusPoints(selected, 1)} text={"Vote +1"} />
       <Button handleClick={() => setSelected(~~(Math.random() * (anecdotes.length)))} text={"Another one!"} />
+      <h2>Top scoring anecdote atm</h2>
+      <BestAnecdote anecdotes={anecdotes} points={points}/>
+
     </div>
   )
 }
