@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const Course = ({course}) => {
-  console.log(course.parts.id)
+  let exercises = course.parts.map(parts => parts.exercises)
+  let sumOfExercises = exercises.reduce((a, b) => a + b, 0)
   return (
     <div>
       <h1>{course.name}</h1>
@@ -16,6 +17,7 @@ const Course = ({course}) => {
           })
         }
       </ul>
+      <strong>Total of exercises: {sumOfExercises}</strong>
     </div>
   )
 }
