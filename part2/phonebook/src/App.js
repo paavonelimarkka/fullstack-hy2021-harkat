@@ -25,9 +25,17 @@ const App = () => {
 
   const addName = (event) => { 
     event.preventDefault()
-    const nameObject = { name: newName }
-    setNumbers(numbers.concat(nameObject))
-    setNewName('')
+
+    if (numbers.some(e => e.name === newName)) {
+      alert(newName + " is already added to phonebook")
+      console.log("Miau")
+    }
+    else {
+      const nameObject = { name: newName }
+      setNumbers(numbers.concat(nameObject))
+      setNewName('')
+    }
+
   }
 
   return (
