@@ -1,5 +1,26 @@
 import React, { useState } from 'react'
 
+const AddPerson = (props) => {
+  return (
+    <form>
+      <div> Name: <input value={props.newName} onChange={props.handleNameChange} /></div>
+      <div> Number: <input value={props.newNumber} onChange={props.handleNumberChange} /></div>
+
+      <div>
+        <button type="submit" onClick={props.addData} >Add</button>
+      </div>
+    </form>
+  )
+}
+
+const SearchPerson = (props) => {
+  return (
+    <form>
+        <input value={props.newSearch} onChange={props.handleSearchChange} />
+      </form>
+  )
+}
+
 const Names = (props) => {
   return (
     <ul>
@@ -59,19 +80,19 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <form>
-        <div> Name: <input value={newName} onChange={handleNameChange} /></div>
-        <div> Number: <input value={newNumber} onChange={handleNumberChange} /></div>
-
-        <div>
-          <button type="submit" onClick={addData} >Add</button>
-        </div>
-      </form>
+      <AddPerson
+        newName={newName}
+        newNumber={newNumber}
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+        addData={addData}
+      />
 
       <h2>Search users</h2>
-      <form>
-        <input value={newSearch} onChange={handleSearchChange} />
-      </form>
+      <SearchPerson
+        newSearch={newSearch}
+        handleSearchChange={handleSearchChange}
+      />
 
       <h2>Numbers</h2>
       <Names numbers={numbers} namesToShow={namesToShow} />
