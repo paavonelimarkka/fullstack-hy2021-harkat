@@ -6,6 +6,7 @@ function App() {
 
   const [newSearch, setNewSearch] = useState('')
   const [countries, setCountries] = useState([])
+  const [countryToShow, setCountryToShow] = useState('')
 
   useEffect(() => {
     axios
@@ -16,6 +17,7 @@ function App() {
   }, [])
 
   const handleSearchChange = (event) => { setNewSearch(event.target.value) }
+  const handleCountryToShow = (event) => { setCountryToShow(event.target.value) }
 
   const filteredCountries = countries.filter(countries => countries.name.toLowerCase().includes(newSearch.toLowerCase()))
 
@@ -24,7 +26,34 @@ function App() {
     : 
     filteredCountries.map(countries => {
       return (
-        <li key={countries.name}>{countries.name}</li>
+        <li key={countries.name}>
+          {countries.name}
+          <input key={countries.name} type="button" value={countries.name} onClick={handleCountryToShow}/>
+          
+            { countryToShow === countries.name // This same render is in two places and it should be tidied up
+            ?
+              <div>
+                  <h2>{countries.name}</h2>
+                  <ul>
+                    <li key={countries.capital}>Capital: {countries.capital}</li>
+                    <li key={countries.population}>Population: {countries.population}</li>
+                  </ul>
+                  <h3>Languages</h3>
+                  <ul>
+                    {countries.languages.map(languages => {
+                        return(
+                          <li key={languages.name}>{languages.name}</li>
+                        )
+                      })
+                    }
+                  </ul>
+                  <img src={countries.flag} alt="flag" height="200px" />
+                </div>
+            : ''
+              
+            }
+
+        </li>
       )
     })
 
